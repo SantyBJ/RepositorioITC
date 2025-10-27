@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Repositorio ITC - Inicio</title>
+<style>
+body { 
+    font-family: Arial; 
+    background:#eef2f5; 
+    text-align:center; 
+    margin:0; 
+}
+header { 
+    background:#003366; 
+    color:white; 
+    padding:15px; 
+    display:flex; 
+    align-items:center; 
+    justify-content:space-between; 
+}
+header img { height:50px; }
+.container { margin-top:40px; }
+.module { 
+    display:inline-block; 
+    background:white; 
+    padding:30px; 
+    margin:15px; 
+    border-radius:12px; 
+    width:200px; 
+    box-shadow:0 4px 10px rgba(0,0,0,0.1); 
+}
+.module a { 
+    text-decoration:none; 
+    color:#004aad; 
+    font-weight:bold; 
+}
+.module:hover { background:#f0f4ff; }
+.btn-registrar {
+    display:inline-block;
+    margin-top:40px;
+    padding:15px 40px;
+    background:#004aad;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+    text-decoration:none;
+    font-weight:bold;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+.btn-registrar:hover {
+    background:#003080;
+}
+.logout-btn {
+    background:#b30000;
+    color:white;
+    border:none;
+    border-radius:6px;
+    padding:8px 15px;
+    cursor:pointer;
+    font-weight:bold;
+}
+.logout-btn:hover {
+    background:#800000;
+}
+.rol {
+    font-size:14px;
+    color:#f0f0f0;
+    margin-left:10px;
+}
+</style>
+</head>
+<body>
+<header>
+    <div style="display:flex; align-items:center; gap:10px;">
+        <img src="/static/logo_itc.png" alt="ITC Logo">
+        <div>
+            <h2 style="margin:0;">Bienvenido, {{ usuario.nombre }}</h2>
+            <span class="rol">Rol: {{ 'Editor' if usuario.rol == 'E' else 'Lector' }}</span>
+        </div>
+    </div>
+    <a href="/logout"><button class="logout-btn">Cerrar Sesión</button></a>
+</header>
+
+<div class="container">
+    <h1>Módulos del Repositorio</h1>
+
+    {% for m in modulos %}
+    <div class="module">
+        <a href="/artefactos/{{ m.prefijo }}">{{ m.nombre }}</a>
+    </div>
+    {% endfor %}
+
+    {% if usuario.rol == 'E' %}
+    <div style="margin-top:60px;">
+        <a href="/registrar" class="btn-registrar">Registrar Artefactos</a>
+    </div>
+    {% endif %}
+
+    <div style="margin-top:20px;">
+        <a href="/buscar" class="btn-registrar" style="background:#004aad; color:white;">Buscar Artefactos</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Confirmar eliminación</title>
+<style>
+body { font-family: Arial; background:#f8f9fb; margin:0; padding:40px; text-align:center; }
+.container {
+    background:white; max-width:600px; margin:auto; padding:30px;
+    border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+h1 { color:#b30000; }
+button {
+    margin:15px; padding:10px 20px; border:none; border-radius:6px;
+    cursor:pointer; font-weight:bold;
+}
+.btn-danger { background:#b30000; color:white; }
+.btn-cancel { background:#ccc; color:black; }
+.btn-danger:hover { background:#800000; }
+.btn-cancel:hover { background:#aaa; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Confirmar eliminación</h1>
+    <p>¿Estás seguro de que deseas eliminar el artefacto <strong>{{ id_archivo }}</strong>?</p>
+    <p><em>{{ descripcion }}</em></p>
+
+    <form method="POST">
+        <button type="submit" class="btn-danger">Sí, eliminar definitivamente</button>
+        <a href="/detalle/{{ id_archivo }}"><button type="button" class="btn-cancel">Cancelar</button></a>
+    </form>
+</div>
+</body>
+</html>

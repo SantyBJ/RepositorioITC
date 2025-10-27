@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Artefacto | ITC</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f8; margin: 0; padding: 0; }
+        .container {
+            max-width: 600px;
+            background: white;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h1 { text-align: center; color: #003366; }
+        form { display: flex; flex-direction: column; }
+        label { margin-top: 15px; font-weight: bold; }
+        input, textarea {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            width: 100%;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            background: #004aad;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover { background: #003080; }
+        .mensaje {
+            text-align: center;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 6px;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .btn-volver {
+            display: inline-block;
+            margin-top: 25px;
+            text-align: center;
+            background: #004aad;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .btn-volver:hover {
+            background: #003080;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registrar Artefacto</h1>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for msg in messages %}
+                    <div class="mensaje {{ 'success' if '✅' in msg else 'error' }}">{{ msg }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="/registrar" method="POST" enctype="multipart/form-data">
+            <label for="nombre">Nombre del artefacto *</label>
+            <input type="text" id="nombre" name="nombre">
+
+            <label for="descripcion">Descripción *</label>
+            <textarea id="descripcion" name="descripcion" rows="4"></textarea>
+
+            <label for="archivo">Archivo (.zip obligatorio)</label>
+            <input type="file" id="archivo" name="archivo" accept=".zip">
+
+            <button type="submit">Guardar Artefacto</button>
+        </form>
+
+        <!-- Nuevo botón para regresar al menú principal -->
+        <div style="text-align:center;">
+            <a href="/" class="btn-volver">Volver al Menú Principal</a>
+        </div>
+    </div>
+</body>
+</html>

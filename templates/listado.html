@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Listado de Artefactos</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background:#f5f6fa;
+    margin:0;
+    padding:20px;
+}
+h1 {
+    color:#003366;
+}
+table {
+    border-collapse: collapse;
+    width:100%;
+    margin-top:20px;
+}
+th, td {
+    border:1px solid #ccc;
+    padding:8px;
+    text-align:left;
+}
+th {
+    background:#004aad;
+    color:white;
+}
+tr:hover {
+    background:#f0f4ff;
+}
+a {
+    color:#004aad;
+    text-decoration:none;
+}
+a:hover {
+    text-decoration:underline;
+}
+select {
+    margin-left:10px;
+    padding:5px;
+    border-radius:6px;
+}
+.btn-volver {
+    display:inline-block;
+    background:#004aad;
+    color:white;
+    padding:10px 20px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    text-decoration:none;
+    font-weight:bold;
+    margin-top:10px;
+    margin-bottom:15px;
+    transition: background 0.3s ease;
+}
+.btn-volver:hover {
+    background:#003080;
+}
+</style>
+</head>
+<body>
+
+<h1>Artefactos del módulo {{ prefijo }}</h1>
+
+<!-- Botón estilizado para volver al menú principal -->
+<a href="/" class="btn-volver">Volver al Menú Principal</a>
+
+<form method="get">
+    Ordenar por:
+    <select name="orden" onchange="this.form.submit()">
+        <option value="fecha" {% if orden=='fecha' %}selected{% endif %}>Fecha</option>
+        <option value="nombre" {% if orden=='nombre' %}selected{% endif %}>Nombre</option>
+    </select>
+</form>
+
+<table>
+<tr>
+    <th>ID (Nombre del Artefacto)</th>
+    <th>Descripción</th>
+    <th>Versión</th>
+    <th>Usuario</th>
+    <th>Fecha</th>
+</tr>
+{% for a in artefactos %}
+<tr>
+    <td><a href="/detalle/{{ a[0] }}">{{ a[0] }}</a></td>
+    <td>{{ a[1] }}</td>
+    <td>{{ a[2] }}</td>
+    <td>{{ a[3] }}</td>
+    <td>{{ a[4] }}</td>
+</tr>
+{% else %}
+<tr>
+    <td colspan="5" style="text-align:center;">No se encontraron artefactos</td>
+</tr>
+{% endfor %}
+</table>
+
+</body>
+</html>

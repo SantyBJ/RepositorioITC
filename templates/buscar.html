@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Búsqueda de Artefactos</title>
+<style>
+body { font-family: Arial; background:#f5f6fa; margin:0; padding:20px; }
+.container {
+    max-width: 800px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+h1 { color:#003366; text-align:center; }
+form { text-align:center; margin-bottom:20px; }
+input[type=text] {
+    padding:8px; width:60%; border:1px solid #ccc; border-radius:6px;
+}
+button {
+    padding:9px 20px; background:#004aad; color:white; border:none; border-radius:6px;
+    cursor:pointer; font-weight:bold;
+}
+button:hover { background:#003080; }
+table { border-collapse: collapse; width:100%; margin-top:20px; }
+th, td { border:1px solid #ccc; padding:8px; text-align:left; }
+th { background:#004aad; color:white; }
+tr:hover { background:#f0f4ff; }
+.mensaje { text-align:center; margin-top:20px; color:#555; font-style:italic; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Buscar Artefactos</h1>
+
+    <form method="POST">
+        <input type="text" name="termino" placeholder="Ingrese nombre o palabra clave" value="{{ termino }}">
+        <button type="submit">Buscar</button>
+    </form>
+
+    {% if resultados %}
+    <table>
+        <tr>
+            <th>ID Artefacto</th>
+            <th>Descripción</th>
+            <th>Versión</th>
+            <th>Usuario</th>
+            <th>Fecha</th>
+        </tr>
+        {% for r in resultados %}
+        <tr>
+            <td><a href="/detalle/{{ r[0] }}">{{ r[0] }}</a></td>
+            <td>{{ r[1] }}</td>
+            <td>{{ r[2] }}</td>
+            <td>{{ r[3] }}</td>
+            <td>{{ r[4] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% elif termino %}
+    <p class="mensaje">No se encontraron resultados para "<strong>{{ termino }}</strong>".</p>
+    {% endif %}
+
+    <div style="margin-top:20px; text-align:center;">
+        <a href="/"><button style="background:#004aad; color:white;">Volver al menú principal</button></a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Login | ITC</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f6fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.login-box {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 360px;
+    text-align: center;
+}
+.logo {
+    display: block;
+    margin: 0 auto 15px auto;
+    width: 160px;
+    height: auto;
+}
+h1 {
+    color: #004aad;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    text-align: left;
+    color: #003366;
+}
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-top: 5px;
+    font-size: 14px;
+}
+button {
+    margin-top: 25px;
+    padding: 10px;
+    width: 100%;
+    background: #004aad;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+}
+button:hover {
+    background: #003080;
+}
+.mensaje {
+    margin-top: 15px;
+    color: red;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="login-box">
+    <!-- 🔷 Logo de ITC centrado -->
+    <img src="/static/logo_itc_login.png" alt="Logo ITC" class="logo">
+
+    <h1>Inicio de Sesión</h1>
+
+    <form method="POST">
+        <label for="usuario">Usuario</label>
+        <input type="text" name="usuario" id="usuario" required>
+
+        <label for="contrasena">Contraseña</label>
+        <input type="password" name="contrasena" id="contrasena" required>
+
+        <button type="submit">Ingresar</button>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="mensaje">
+                {% for msg in messages %}
+                    <p>{{ msg }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+</div>
+</body>
+</html>

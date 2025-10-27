@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Editar Artefacto</title>
+<style>
+body { font-family: Arial; background:#f4f6f8; margin:0; padding:20px; }
+.container {
+    background:white; padding:25px; border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    max-width:600px; margin:auto;
+}
+h1 { color:#003366; text-align:center; }
+label { display:block; margin-top:15px; font-weight:bold; }
+textarea, input[type=file] {
+    width:100%; padding:8px; border:1px solid #ccc;
+    border-radius:6px; margin-top:5px;
+}
+button {
+    margin-top:20px; padding:10px; width:100%;
+    background:#004aad; color:white; border:none;
+    border-radius:6px; cursor:pointer;
+}
+button:hover { background:#003080; }
+.mensaje {
+    text-align:center; padding:10px; margin-top:10px; border-radius:6px;
+}
+.success { background:#d4edda; color:#155724; }
+.error { background:#f8d7da; color:#721c24; }
+
+.btn-volver {
+    display:inline-block;
+    margin-top:15px;
+    text-align:center;
+    background:#004aad;
+    color:white;
+    padding:10px 20px;
+    border-radius:6px;
+    text-decoration:none;
+    font-weight:bold;
+    transition: background 0.3s ease;
+}
+.btn-volver:hover {
+    background:#003080;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Editar Artefacto</h1>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <div class="mensaje {{ 'success' if '✅' in msg else 'error' }}">{{ msg }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <label for="descripcion">Descripción *</label>
+        <textarea id="descripcion" name="descripcion" rows="4">{{ descripcion_actual }}</textarea>
+
+        <label for="archivo">Nuevo archivo (.zip, opcional)</label>
+        <input type="file" id="archivo" name="archivo" accept=".zip">
+
+        <button type="submit">Guardar Cambios</button>
+    </form>
+
+    <!-- Nuevo botón para volver al detalle del artefacto -->
+    <div style="text-align:center;">
+        <a href="/detalle/{{ id_archivo }}" class="btn-volver">Volver al Detalle del Artefacto</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Detalle de Artefacto</title>
+<style>
+body { font-family: Arial; background:#f8f9fb; margin:0; padding:20px; }
+.container {
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    max-width:800px;
+    margin:auto;
+}
+h1 { color:#003366; }
+h2 { margin-top:30px; color:#004aad; }
+button {
+    padding:10px 20px;
+    background:#004aad;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    margin-right:5px;
+}
+button:hover { background:#003080; }
+table { width:100%; border-collapse:collapse; margin-top:20px; }
+th, td { border:1px solid #ccc; padding:8px; text-align:left; }
+th { background:#004aad; color:white; }
+.logout-btn {
+    background:#b30000;
+    color:white;
+    border:none;
+    border-radius:6px;
+    padding:8px 15px;
+    cursor:pointer;
+    font-weight:bold;
+}
+.logout-btn:hover { background:#800000; }
+</style>
+</head>
+<body>
+<div class="container">
+    <!-- Encabezado del artefacto -->
+    <h1>{{ id_archivo }}</h1>
+    <p><strong>Descripción:</strong> {{ archivo[0] }}</p>
+
+    <!-- Botones de acción -->
+    {% if archivo[1] %}
+    <a href="/descargar/{{ id_archivo }}"><button>Descargar ZIP</button></a>
+    {% endif %}
+
+    {% if usuario.rol == 'E' %}
+    <!-- Solo los editores pueden editar o eliminar -->
+    <a href="/editar/{{ id_archivo }}"><button>Editar Artefacto</button></a>
+    <a href="/eliminar/{{ id_archivo }}"><button style="background:#b30000;">Eliminar Artefacto</button></a>
+    {% endif %}
+
+    <a href="/artefactos/{{ prefijo }}"><button style="background:#004aad; color:white;">Volver al listado</button></a>
+
+    <div style="text-align:right; margin-top:10px;">
+        <a href="/logout"><button class="logout-btn">Cerrar Sesión</button></a>
+    </div>
+
+    <!-- Tabla de versiones -->
+    <h2>Versiones</h2>
+    <table>
+        <tr>
+            <th>Versión</th>
+            <th>Descripción</th>
+            <th>Usuario</th>
+            <th>Fecha</th>
+        </tr>
+        {% for v in versiones %}
+        <tr>
+            <td>{{ v[0] }}</td>
+            <td>{{ v[1] }}</td>
+            <td>{{ v[2] }}</td>
+            <td>{{ v[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>
