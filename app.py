@@ -147,6 +147,8 @@ def descargar_archivo(id_archivo):
         return send_file(result[0], as_attachment=True)
     return redirect(f"/detalle/{id_archivo}")
 
+@app.route("/registrar", methods=["GET", "POST"])
+@login_requerido
 def registrar():
     if session["usuario"]["rol"] == "L":
         flash("No tiene permisos para registrar artefactos.")
